@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  react_service:
+    container_name: 01-react-sells-app-container
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - /01-react-sells-app/node_modules
