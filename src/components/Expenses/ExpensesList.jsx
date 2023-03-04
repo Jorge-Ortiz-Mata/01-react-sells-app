@@ -4,7 +4,7 @@ export default function ExpensesList({expenses}){
 
   return(
     <section>
-      { expenses.map(expense => {
+      { expenses.map(({expense}) => {
         return (
           <ExpenseItem
             key={expense.id}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ExpenseForm(){
+export default function ExpenseForm({onSubmitForm}){
   const [expense, setExpense] = useState({
     title: '',
     amount: 0,
@@ -17,11 +17,20 @@ export default function ExpenseForm(){
 
   function handleSubmit(e){
     e.preventDefault();
-    setExpense({
-      title: '',
-      amount: 0,
-      date: ''
-    });
+
+    const buildExpense = {
+      title: expense.title,
+      amount: expense.amount,
+      date: new Date(expense.date)
+    }
+
+    onSubmitForm(buildExpense);
+
+    // setExpense({
+    //   title: '',
+    //   amount: 0,
+    //   date: ''
+    // });
   }
 
   return(
