@@ -22,15 +22,15 @@ export default function ExpenseForm({onSubmitForm}){
       title: expense.title,
       amount: expense.amount,
       date: new Date(expense.date)
-    }
+    };
 
     onSubmitForm(buildExpense);
 
-    // setExpense({
-    //   title: '',
-    //   amount: 0,
-    //   date: ''
-    // });
+    setExpense({
+      title: '',
+      amount: 0,
+      date: ''
+    });
   }
 
   return(
