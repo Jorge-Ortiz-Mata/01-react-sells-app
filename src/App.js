@@ -15,9 +15,6 @@ function App() {
 
   function filterExpenses(yearFiltered){
     const filterExpenses = expensesList.filter(({expense}) => expense.date.getFullYear() == yearFiltered);
-    console.log('====================================');
-    console.log(filterExpenses);
-    console.log('====================================');
     setFilteredExpenses(filterExpenses);
   }
 
