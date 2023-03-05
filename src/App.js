@@ -1,31 +1,11 @@
 import { useState } from "react";
 import ExpensesList from "./components/Expenses/ExpensesList";
 import NewExpense from "./components/NewExpense/NewExpense";
+import FilterComponent from "./components/FilterExpenses/FilterComponent";
 
 function App() {
   const [expensesList, setExpensesList] = useState([]);
-
-  // const expenses = [
-  //   {
-  //     id: 'e1',
-  //     title: 'Toilet Paper',
-  //     amount: 94.12,
-  //     date: new Date(2020, 7, 14),
-  //   },
-  //   { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
-  //   {
-  //     id: 'e3',
-  //     title: 'Car Insurance',
-  //     amount: 294.67,
-  //     date: new Date(2021, 2, 28),
-  //   },
-  //   {
-  //     id: 'e4',
-  //     title: 'New Desk (Wooden)',
-  //     amount: 450,
-  //     date: new Date(2021, 5, 12),
-  //   },
-  // ];
+  const [filteredExpenses, setFilteredExpenses] = useState([]);
 
   function addExpenseHandler(expense){
     setExpensesList((prevState) => {
@@ -33,10 +13,27 @@ function App() {
     })
   }
 
+  function filterExpenses(yearFiltered){
+    const filterExpenses = expensesList.filter(({expense}) => expense.date.getFullYear() == yearFiltered);
+    console.log('====================================');
+    console.log(filterExpenses);
+    console.log('====================================');
+    setFilteredExpenses(filterExpenses);
+  }
+
+  function resetFilter(){
+    setFilteredExpenses([]);
+  }
+
   return (
     <main className='flex flex-col bg-gray-400'>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <ExpensesList expenses={expensesList} />
+      <FilterComponent onFilterExpenses={filterExpenses} onResetFilter={resetFilter} />
+      {
+        filteredExpenses.length > 0
+        ? <ExpensesList expenses={filteredExpenses} />
+        : <ExpensesList expenses={expensesList} />
+      }
     </main>
   );
 }
